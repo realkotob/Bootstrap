@@ -1,0 +1,119 @@
+{
+  "name": "Lock without Key",
+  "rows": 4,
+  "cols": 4,
+  "cells": [
+    {
+      "row": -2,
+      "col": -2,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -2,
+      "col": -1,
+      "cellType": 0,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -2,
+      "col": 0,
+      "cellType": 3,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -2,
+      "col": 1,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -1,
+      "col": -2,
+      "cellType": 8,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -1,
+      "col": -1,
+      "cellType": 0,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -1,
+      "col": 0,
+      "cellType": 0,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": -1,
+      "col": 1,
+      "cellType": 0,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 0,
+      "col": -2,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 0,
+      "col": -1,
+      "cellType": 0,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 0,
+      "col": 0,
+      "cellType": 6,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 1,
+      "col": -2,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 1,
+      "col": -1,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "cellType": 1,
+      "label": "",
+      "keys": []
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "cellType": 9,
+      "label": "",
+      "keys": []
+    }
+  ]
+}
