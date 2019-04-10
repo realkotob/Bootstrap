@@ -27,52 +27,97 @@ margin_bottom = 720.0
 
 [node name="ActiveState" type="Node" parent="EditorPanel"]
 
-[node name="Label" type="Label" parent="EditorPanel/ActiveState"]
+[node name="LevelNameLabel" type="Label" parent="EditorPanel/ActiveState"]
+visible = false
+margin_left = 60.0
+margin_top = 40.0
+margin_right = 180.0
+margin_bottom = 60.0
+text = "Level Name:"
+align = 1
+valign = 1
+
+[node name="LevelNameEdit" type="LineEdit" parent="EditorPanel/ActiveState"]
 visible = false
 margin_left = 60.0
 margin_top = 60.0
 margin_right = 180.0
-margin_bottom = 74.0
-text = "Select Action:"
+margin_bottom = 100.0
 
-[node name="TileList" type="ItemList" parent="EditorPanel/ActiveState"]
+[node name="SelectActionLabel" type="Label" parent="EditorPanel/ActiveState"]
 visible = false
 margin_left = 60.0
-margin_top = 80.0
+margin_top = 100.0
 margin_right = 180.0
-margin_bottom = 140.0
+margin_bottom = 120.0
+text = "Select Action:"
+align = 1
+valign = 1
+
+[node name="ActionList" type="ItemList" parent="EditorPanel/ActiveState"]
+visible = false
+margin_left = 60.0
+margin_top = 120.0
+margin_right = 180.0
+margin_bottom = 160.0
+
+[node name="SaveLevel" type="Button" parent="EditorPanel/ActiveState"]
+visible = false
+margin_left = 60.0
+margin_top = 180.0
+margin_right = 180.0
+margin_bottom = 220.0
+text = "Save Level"
+
+[node name="ExitEdit" type="Button" parent="EditorPanel/ActiveState"]
+visible = false
+margin_left = 60.0
+margin_top = 240.0
+margin_right = 180.0
+margin_bottom = 280.0
+text = "Exit"
 
 [node name="InitialState" type="Node" parent="EditorPanel"]
 
-[node name="ImportJSON" type="Button" parent="EditorPanel/InitialState"]
+[node name="LevelEditorLabel" type="Label" parent="EditorPanel/InitialState"]
 margin_left = 60.0
 margin_top = 40.0
 margin_right = 180.0
 margin_bottom = 80.0
-text = "Import JSON"
+text = "Level Editor"
+align = 1
+valign = 1
 
-[node name="StartNew" type="Button" parent="EditorPanel/InitialState"]
+[node name="ImportJSON" type="Button" parent="EditorPanel/InitialState"]
 margin_left = 60.0
 margin_top = 100.0
 margin_right = 180.0
 margin_bottom = 140.0
+text = "Import JSON"
+
+[node name="StartNew" type="Button" parent="EditorPanel/InitialState"]
+margin_left = 60.0
+margin_top = 160.0
+margin_right = 180.0
+margin_bottom = 200.0
 text = "Start New Level"
 
-[node name="JSONPicker" type="FileDialog" parent="EditorPanel/InitialState"]
-margin_right = 275.0
-margin_bottom = 130.0
-window_title = "Open a File"
-mode = 0
-access = 2
-current_dir = "C:/Users/Tyler/godot/Bootstrap"
-current_path = "C:/Users/Tyler/godot/Bootstrap/"
+[node name="Exit" type="Button" parent="EditorPanel/InitialState"]
+margin_left = 60.0
+margin_top = 220.0
+margin_right = 180.0
+margin_bottom = 260.0
+text = "Exit"
 
-[node name="AcceptDialog" type="AcceptDialog" parent="EditorPanel/InitialState"]
-margin_right = 128.0
-margin_bottom = 58.0
-window_title = "Parsing Error"
+[node name="Popups" type="Node" parent="EditorPanel"]
 
-[connection signal="item_selected" from="EditorPanel/ActiveState/TileList" to="EditorTileMap" method="_on_TileList_item_selected"]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="EditorPanel/Popups"]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[connection signal="text_changed" from="EditorPanel/ActiveState/LevelNameEdit" to="EditorTileMap" method="_on_LevelNameEdit_text_changed"]
+[connection signal="item_selected" from="EditorPanel/ActiveState/ActionList" to="EditorTileMap" method="_on_TileList_item_selected"]
+[connection signal="pressed" from="EditorPanel/ActiveState/ExitEdit" to="." method="_on_ExitEdit_pressed"]
 [connection signal="pressed" from="EditorPanel/InitialState/ImportJSON" to="." method="_on_ImportJSON_pressed"]
 [connection signal="pressed" from="EditorPanel/InitialState/StartNew" to="." method="_on_StartNew_pressed"]
-[connection signal="file_selected" from="EditorPanel/InitialState/JSONPicker" to="." method="_on_JSONPicker_file_selected"]
+[connection signal="pressed" from="EditorPanel/InitialState/Exit" to="." method="_on_Exit_pressed"]

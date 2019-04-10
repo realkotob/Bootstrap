@@ -1,5 +1,6 @@
 extends TileMap
 
+var level_name: String
 var active_tile: int
 
 func _ready():
@@ -9,6 +10,13 @@ func _ready():
 
 func _process(delta):
 	pass
+
+func reset_editor():
+	active_tile = -1
+	level_name = ""
+	tile_set.clear()
+	hide()
+	set_process_unhandled_input(false)
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.pressed:
@@ -22,3 +30,6 @@ func _unhandled_input(event):
 
 func _on_TileList_item_selected(index):
 	active_tile = index
+
+func _on_LevelNameEdit_text_changed(new_text: String):
+	level_name = new_text

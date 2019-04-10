@@ -1,17 +1,25 @@
 extends Node
 
+signal end_level
+
 func _ready():
 	var ids := ($EditorTileMap as TileMap).tile_set.get_tiles_ids()
 	for id in ids:
 		var name := ($EditorTileMap as TileMap).tile_set.tile_get_name(id)
-		($EditorPanel/ActiveState/TileList).add_item("Place " + name, null, true)
+		($EditorPanel/ActiveState/ActionList).add_item("Place " + name, null, true)
 
 func _on_ImportJSON_pressed():
-	($EditorPanel/JSONPicker as FileDialog).popup_centered_ratio()
+	var dialog := FileDialog.new()
+	dialog.mode = FileDialog.MODE_OPEN_FILE
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.window_title = "Open a JSON"
+	dialog.connect("file_selected", self, "_on_JSONPicker_file_selected")
+	($EditorPanel/Popups as Node).add_child(dialog)
+	dialog.popup_centered_ratio()
 
 func show_error(text: String):
-	($EditorPanel/AcceptDialog as AcceptDialog).dialog_text = text
-	($EditorPanel/AcceptDialog as AcceptDialog).popup_centered()
+	($EditorPanel/Popups/AcceptDialog as AcceptDialog).dialog_text = text
+	($EditorPanel/Popups/AcceptDialog as AcceptDialog).popup_centered()
 
 func load_file(path: String):
 	var file = File.new()
@@ -87,5 +95,19 @@ func _on_StartNew_pressed():
 	for child in children:
 		child.hide()
 	children = ($EditorPanel/ActiveState as Node).get_children()
+	for child in children:
+		child.show()
+
+func _on_Exit_pressed():
+	emit_signal("end_level")
+
+func _on_ExitEdit_pressed():
+	($EditorTileMap as TileMap).reset_editor()
+	($EditorPanel/ActiveState/LevelNameEdit as LineEdit).clear()
+	($EditorPanel/ActiveState/ActionList as ItemList).unselect_all()
+	var children := ($EditorPanel/ActiveState as Node).get_children()
+	for child in children:
+		child.hide()
+	children = ($EditorPanel/InitialState as Node).get_children()
 	for child in children:
 		child.show()
