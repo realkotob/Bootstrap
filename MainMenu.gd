@@ -1,6 +1,7 @@
 extends Node2D
 
 signal start_level(level)
+signal start_editor
 
 var gamelevels = {}
 
@@ -12,3 +13,6 @@ func _ready():
 
 func _on_StartButton_pressed():
 	emit_signal("start_level", "let_me_in")
+
+func _on_LevelEditor_pressed():
+	emit_signal("start_editor")
