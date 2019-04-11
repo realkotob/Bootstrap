@@ -7,6 +7,7 @@ func _ready():
 	for id in ids:
 		var name := ($EditorTileMap as TileMap).tile_set.tile_get_name(id)
 		($EditorPanel/ActiveState/ActionList).add_item("Place " + name, null, true)
+	($EditorPanel/ActiveState/ActionList).add_item("Erase Tile", null, true)
 
 func _on_ImportJSON_pressed():
 	var dialog := FileDialog.new()
@@ -89,8 +90,7 @@ func _on_JSONPicker_file_selected(path: String):
 	var levelobj := LevelObject.new(name, rows, cols, cellobjs)
 
 func _on_StartNew_pressed():
-	($EditorTileMap as TileMap).show()
-	($EditorTileMap as TileMap).set_process_unhandled_input(true)
+	($EditorTileMap as TileMap).enable_editor()
 	var children := ($EditorPanel/InitialState as Node).get_children()
 	for child in children:
 		child.hide()
