@@ -117,6 +117,7 @@ margin_bottom = 70.0
 
 [connection signal="text_changed" from="EditorPanel/ActiveState/LevelNameEdit" to="EditorTileMap" method="_on_LevelNameEdit_text_changed"]
 [connection signal="item_selected" from="EditorPanel/ActiveState/ActionList" to="EditorTileMap" method="_on_TileList_item_selected"]
+[connection signal="pressed" from="EditorPanel/ActiveState/SaveLevel" to="." method="_on_SaveLevel_pressed"]
 [connection signal="pressed" from="EditorPanel/ActiveState/ExitEdit" to="." method="_on_ExitEdit_pressed"]
 [connection signal="pressed" from="EditorPanel/InitialState/ImportJSON" to="." method="_on_ImportJSON_pressed"]
 [connection signal="pressed" from="EditorPanel/InitialState/StartNew" to="." method="_on_StartNew_pressed"]

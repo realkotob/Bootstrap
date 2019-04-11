@@ -111,3 +111,10 @@ func _on_ExitEdit_pressed():
 	children = ($EditorPanel/InitialState as Node).get_children()
 	for child in children:
 		child.show()
+
+func _on_SaveLevel_pressed():
+	# debug information
+	for item in ($EditorTileMap as TileMap).get_used_cells():
+		print(item.x, ",", item.y)
+	# TODO popup a save window for JSON output
+	_on_ExitEdit_pressed()
