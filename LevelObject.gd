@@ -2,10 +2,10 @@ extends Node
 
 class_name LevelObject
 
-var levelName: String
-var rows: int
-var cols: int
-var cells: Array
+export var levelName: String
+export var rows: int
+export var cols: int
+export var cells: Array
 
 func _init(levelName: String, rows: int, cols: int, cells: Array):
 	self.levelName = levelName

@@ -88,6 +88,8 @@ func _on_JSONPicker_file_selected(path: String):
 		var keys: Array = cell["keys"]
 		cellobjs.append(Cell.new(row, col, cellType, label, keys))
 	var levelobj := LevelObject.new(name, rows, cols, cellobjs)
+	_on_StartNew_pressed()
+	($EditorTileMap as TileMap).load_level_data(levelobj)
 
 func _on_StartNew_pressed():
 	($EditorTileMap as TileMap).enable_editor()

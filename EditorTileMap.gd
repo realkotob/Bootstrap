@@ -2,6 +2,8 @@ extends TileMap
 
 enum actions { NONE = 0, PLACE_TILE, ERASE }
 
+onready var LevelObject = preload("res://LevelObject.gd")
+
 var initpos := Vector2(640, 360)
 var level_name: String
 var active_tile: int
@@ -68,3 +70,8 @@ func _on_TileList_item_selected(index):
 
 func _on_LevelNameEdit_text_changed(new_text: String):
 	level_name = new_text
+
+func load_level_data(levelobj: LevelObject):
+	for c in levelobj.cells:
+		var cell := (c as Cell)
+		set_cell(cell.row, cell.col, cell.cellType)
