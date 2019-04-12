@@ -11,7 +11,7 @@ var action: int
 var rclick_down: bool
 var rclick_pos: Vector2
 var orig_pos: Vector2
-var offset := Vector2(28,16)
+var offset := Vector2(16,28)
 
 func _ready():
 	position = initpos
@@ -42,7 +42,6 @@ func reset_editor():
 	hide()
 	set_process_unhandled_input(false)
 	set_process(false)
-	position = Vector2()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.button_index == BUTTON_RIGHT:
