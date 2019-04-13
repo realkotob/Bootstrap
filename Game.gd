@@ -1,6 +1,6 @@
 extends Node
 
-const Cell = preload("res://Cell.gd")
+#const Cell = preload("res://Cell.gd")
 #const GameLevel = preload("res://GameLevel.gd")
 onready var Level_Editor = preload("res://Level_Editor.tscn")
 

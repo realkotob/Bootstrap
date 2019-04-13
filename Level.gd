@@ -2,8 +2,8 @@ extends Node2D
 
 class_name Level
 
-const Cell = preload("res://Cell.gd")
-const LevelObject = preload("res://LevelObject.gd")
+#const CellObject = preload("res://CellObject.gd")
+#const LevelObject = preload("res://LevelObject.gd")
 
 var levelObject: LevelObject
 

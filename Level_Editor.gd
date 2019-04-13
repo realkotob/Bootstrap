@@ -13,7 +13,8 @@ func _on_ImportJSON_pressed():
 	var dialog := FileDialog.new()
 	dialog.mode = FileDialog.MODE_OPEN_FILE
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
-	dialog.window_title = "Open a JSON"
+	dialog.add_filter("*.json ; JSON Files")
+	dialog.window_title = "Open a File"
 	dialog.connect("file_selected", self, "_on_JSONPicker_file_selected")
 	($EditorPanel/Popups as Node).add_child(dialog)
 	dialog.popup_centered_ratio()
@@ -30,6 +31,12 @@ func load_file(path: String):
 	var content: String = file.get_as_text()
 	file.close()
 	return content
+
+func save_file(path: String, data: String):
+	var file = File.new()
+	file.open(path, File.WRITE)
+	file.store_string(data)
+	file.close()
 
 func _on_JSONPicker_file_selected(path: String):
 	var data: String = load_file(path)
@@ -59,7 +66,7 @@ func _on_JSONPicker_file_selected(path: String):
 	if typeof(parsed.result["cells"]) != TYPE_ARRAY:
 		show_error("level cells must be of type array")
 		return
-	var cellobjs: Array
+	var cellobjs: Array = []
 	var cells: Array = parsed.result["cells"]
 	for cell in cells:
 		if typeof(cell) != TYPE_DICTIONARY:
@@ -86,12 +93,14 @@ func _on_JSONPicker_file_selected(path: String):
 				show_error("cell keys must be of type string array")
 				return
 		var keys: Array = cell["keys"]
-		cellobjs.append(Cell.new(row, col, cellType, label, keys))
+		cellobjs.append(CellObject.new(row, col, cellType, label, keys))
 	var levelobj := LevelObject.new(name, rows, cols, cellobjs)
 	_on_StartNew_pressed()
 	($EditorTileMap as TileMap).load_level_data(levelobj)
+	($EditorPanel/ActiveState/LevelNameEdit as LineEdit).text = levelobj.levelName
 
 func _on_StartNew_pressed():
+	($EditorTileMap as TileMap).reset_editor()
 	($EditorTileMap as TileMap).enable_editor()
 	var children := ($EditorPanel/InitialState as Node).get_children()
 	for child in children:
@@ -115,8 +124,26 @@ func _on_ExitEdit_pressed():
 		child.show()
 
 func _on_SaveLevel_pressed():
-	# debug information
-	for item in ($EditorTileMap as TileMap).get_used_cells():
-		print(item.x, ",", item.y)
-	# TODO popup a save window for JSON output
-	_on_ExitEdit_pressed()
+	var dialog := FileDialog.new()
+	dialog.mode = FileDialog.MODE_SAVE_FILE
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.add_filter("*.json ; JSON Files")
+	dialog.window_title = "Save a File"
+	dialog.connect("file_selected", self, "_on_JSONPicker_file_save")
+	($EditorPanel/Popups as Node).add_child(dialog)
+	dialog.popup_centered_ratio()
+
+func _on_JSONPicker_file_save(path: String):
+	$EditorTileMap.center_cells()
+	var levelobj: LevelObject = $EditorTileMap.get_level_object()
+	var cells_dic: Array = []
+	for c in levelobj.cells:
+		cells_dic.append(c.get_dic())
+	var dic: Dictionary = {
+		"name": levelobj.levelName,
+		"rows": levelobj.rows,
+		"cols": levelobj.cols,
+		"cells": cells_dic,
+	}
+	var data: String = JSON.print(dic)
+	save_file(path, data)

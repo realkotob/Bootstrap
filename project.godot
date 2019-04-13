@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "Cell",
+"class": "CellObject",
 "language": "GDScript",
-"path": "res://Cell.gd"
+"path": "res://CellObject.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -25,7 +25,7 @@ _global_script_classes=[ {
 "path": "res://LevelObject.gd"
 } ]
 _global_script_class_icons={
-"Cell": "",
+"CellObject": "",
 "Level": "",
 "LevelObject": ""
 }
@@ -35,10 +35,6 @@ _global_script_class_icons={
 config/name="Bootstrap"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
-
-[debug]
-
-settings/stdout/print_fps=true
 
 [display]
 

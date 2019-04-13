@@ -2,26 +2,22 @@ extends TileMap
 
 enum actions { NONE = 0, PLACE_TILE, ERASE }
 
-onready var LevelObject = preload("res://LevelObject.gd")
+#onready var LevelObject = preload("res://LevelObject.gd")
+#onready var CellObject = preload("res://CellObject.gd")
 
 var initpos := Vector2(640, 360)
-var level_name: String
 var active_tile: int
 var action: int
 var rclick_down: bool
 var rclick_pos: Vector2
 var orig_pos: Vector2
 var offset := Vector2(16,28)
+var levelobj: LevelObject
 
 func _ready():
-	position = initpos
 	rclick_down = false
 	rclick_pos = Vector2()
-	orig_pos = position
-	action = actions.NONE
-	set_process_unhandled_input(false)
-	set_process(false)
-	hide()
+	reset_editor()
 
 func _process(delta):
 	if rclick_down:
@@ -37,7 +33,7 @@ func enable_editor():
 func reset_editor():
 	position = initpos
 	action = actions.NONE
-	level_name = ""
+	levelobj = LevelObject.new("", 0, 0, [])
 	clear()
 	hide()
 	set_process_unhandled_input(false)
@@ -68,9 +64,54 @@ func _on_TileList_item_selected(index):
 		action = actions.ERASE
 
 func _on_LevelNameEdit_text_changed(new_text: String):
-	level_name = new_text
+	levelobj.levelName = new_text
 
 func load_level_data(levelobj: LevelObject):
+	self.levelobj = levelobj
 	for c in levelobj.cells:
-		var cell := (c as Cell)
+		var cell := (c as CellObject)
 		set_cell(cell.row, cell.col, cell.cellType)
+	center_cells()
+
+func center_cells():
+	var cells := get_used_cells()
+	var indices: Array = []
+	if len(cells) == 0:
+		return
+	var min_x: int = (cells[0] as Vector2).x
+	var min_y: int = (cells[0] as Vector2).y
+	for c in cells:
+		var v := c as Vector2
+		indices.push_back(get_cell(v.x, v.y))
+		min_x = min(min_x, v.x)
+		min_y = min(min_y, v.y)
+	var rect_size: Vector2 = get_used_rect().size
+	var to_trans := Vector2(int(-min_x-rect_size.x/2+0.5), int(-min_y-rect_size.y/2+0.5))
+	# todo: fix coordinate position mapping, i.e. center the used_rect
+	clear()
+	for i in range(0, len(cells)):
+		var v: Vector2 = cells[i] + to_trans
+		var tile: int = indices[i]
+		set_cell(v.x, v.y, tile)
+	position = initpos
+
+func get_cell_obj(x: int, y: int):
+	var ind: int = get_cell(x, y)
+	var label: String = ""
+	var keys: Array = []
+	var cell := CellObject.new(x, y, ind, label, keys)
+	return cell
+
+func get_level_object():
+	var rect: Rect2 = get_used_rect()
+	var rect_size: Vector2 = rect.size
+	levelobj.rows = rect_size.x
+	levelobj.cols = rect_size.y
+	var cells: Array = []
+	var used_cells := get_used_cells()
+	for c in used_cells:
+		var v: Vector2 = c
+		var cell: CellObject = get_cell_obj(v.x, v.y)
+		cells.append(cell)
+	levelobj.cells = cells
+	return levelobj
