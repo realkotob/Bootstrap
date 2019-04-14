@@ -147,3 +147,6 @@ func _on_JSONPicker_file_save(path: String):
 	}
 	var data: String = JSON.print(dic)
 	save_file(path, data)
+
+func _on_TestLevel_pressed():
+	pass
