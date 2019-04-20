@@ -23,6 +23,7 @@ margin_bottom = 720.0
 [node name="ActiveState" type="Node" parent="EditorPanel"]
 
 [node name="LevelNameLabel" type="Label" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 40.0
 margin_right = 180.0
@@ -32,12 +33,14 @@ align = 1
 valign = 1
 
 [node name="LevelNameEdit" type="LineEdit" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 60.0
 margin_right = 180.0
 margin_bottom = 84.0
 
 [node name="SelectActionLabel" type="Label" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 100.0
 margin_right = 180.0
@@ -47,12 +50,14 @@ align = 1
 valign = 1
 
 [node name="ActionList" type="ItemList" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 120.0
 margin_right = 180.0
 margin_bottom = 180.0
 
 [node name="SaveLevel" type="Button" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 200.0
 margin_right = 180.0
@@ -60,6 +65,7 @@ margin_bottom = 240.0
 text = "Save Level"
 
 [node name="TestLevel" type="Button" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 260.0
 margin_right = 180.0
@@ -67,6 +73,7 @@ margin_bottom = 300.0
 text = "Test Level"
 
 [node name="ExitEdit" type="Button" parent="EditorPanel/ActiveState"]
+visible = false
 margin_left = 60.0
 margin_top = 320.0
 margin_right = 180.0
@@ -76,7 +83,6 @@ text = "Exit"
 [node name="InitialState" type="Node" parent="EditorPanel"]
 
 [node name="LevelEditorLabel" type="Label" parent="EditorPanel/InitialState"]
-visible = false
 margin_left = 60.0
 margin_top = 40.0
 margin_right = 180.0
@@ -86,7 +92,6 @@ align = 1
 valign = 1
 
 [node name="ImportJSON" type="Button" parent="EditorPanel/InitialState"]
-visible = false
 margin_left = 60.0
 margin_top = 100.0
 margin_right = 180.0
@@ -94,7 +99,6 @@ margin_bottom = 140.0
 text = "Import JSON"
 
 [node name="StartNew" type="Button" parent="EditorPanel/InitialState"]
-visible = false
 margin_left = 60.0
 margin_top = 160.0
 margin_right = 180.0
@@ -102,7 +106,6 @@ margin_bottom = 200.0
 text = "Start New Level"
 
 [node name="Exit" type="Button" parent="EditorPanel/InitialState"]
-visible = false
 margin_left = 60.0
 margin_top = 220.0
 margin_right = 180.0
