@@ -86,8 +86,14 @@ func center_cells():
 		min_x = min(min_x, v.x)
 		min_y = min(min_y, v.y)
 	var rect_size: Vector2 = get_used_rect().size
-	var to_trans := Vector2(int(-min_x-rect_size.x/2+0.5), int(-min_y-rect_size.y/2+0.5))
-	# todo: fix coordinate position mapping, i.e. center the used_rect
+	var dx = int(-min_x-rect_size.x/2)
+	var dy = int(-min_y-rect_size.y/2)
+	if dy % 2 != 0:
+		if dy > 0:
+			dy -= 1
+		else:
+			dy += 1
+	var to_trans := Vector2(dx, dy)
 	clear()
 	for i in range(0, len(cells)):
 		var v: Vector2 = cells[i] + to_trans
